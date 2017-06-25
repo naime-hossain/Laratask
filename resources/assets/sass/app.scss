@@ -12,7 +12,7 @@ body {
   font-size: 12px;
   font-family: "raleway", "Helvetica", "Arial", sans-serif;
   background: #002c53;
-  text-align: center;
+  
 }
 
 body,
@@ -48,7 +48,7 @@ img.raised {
 .form-control,
 .form-group .form-control {
   border: 0;
-  background-image: linear-gradient(#002444, #002444), linear-gradient(#002c53, #002c53);
+  background-image: linear-gradient(#002444, #002444), linear-gradient(rgb(86, 86, 86), rgb(86, 86, 86));
 }
 
 #navbar {
@@ -96,68 +96,16 @@ img.raised {
   min-height: 300px;
 }
 
-.post_heading {
-  margin: 20px 0px 10px;
-}
 
-.post_heading h1 {
-  text-transform: capitalize;
-  font-size: 20px;
-}
-
-.post_heading p {
-  text-transform: capitalize;
-}
-
-.post_heading p span {
-  text-transform: capitalize;
-}
-
-.post_heading p span i {
-  /* display: block; */
-  padding: 3px;
-  margin-left: 3px;
-  /* margin-right: 3px; */
-}
-
-.post_body {
-  display: block;
-}
-
-.post_body img {
-  display: block;
-}
-
-.post_body p {
-  display: block;
-  font-size: 14px;
-  padding: 10px 0px;
-  margin-top: 5px;
-}
 
 .body_wrap {
-  padding: 60px 0px 60px 0px;
-  background: #002444;
-  color: #fff;
+    padding: 60px 0px 60px 0px;
+    background: rgba(86, 86, 86, 0.76);
+    color: #fff;
+    text-align:center;
+    min-height: 50vh;
 }
 
-.sinle_comment_wrap {
-  overflow: hidden;
-  padding: 20px 0px;
-  margin-bottom: 10px;
-  border-bottom: 1px dashed #fd7a60;
-}
-
-.post_wrap {
-  margin-bottom: 40px;
-  padding-bottom: 20px;
-}
-
-.commnet_form {
-  overflow: hidden;
-  margin-bottom: 40px;
-  padding: 20px 0px;
-}
 
 .btn-small {
   padding: 5px 10px;
@@ -217,7 +165,7 @@ div#app-navbar-collapse::after {
   right: 0;
   z-index: -1;
   opacity: 0.7;
-  background: #012442;
+  background: rgb(86, 86, 86);
   display: block;
 }
 
@@ -282,7 +230,7 @@ a:focus {
 }
 
 option {
-  background: #012442;
+  background: rgb(86, 86, 86);
 }
 
 .form-group.is-focused label,
@@ -291,8 +239,8 @@ option {
 }
 
 .footer_wrap {
-  background: #002c53;
-  padding: 10px 0px 30px 0px;
+    background: rgba(83, 83, 83, 0.7);
+    padding: 10px 0px 30px 0px;
 }
 
 .alt_text_wrap {
@@ -369,4 +317,15 @@ option {
 // .datepicker.dropdown-menu .open:last-child(){
 // 	display:none !important;
 // }
-
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    
+    background-color: #3a4753;
+    border: 11px solid #fd7a60;
+    border-width: 0px 30px !important;
+    margin: 10px 0px 10px 0px;
+    text-transform: capitalize;
+}

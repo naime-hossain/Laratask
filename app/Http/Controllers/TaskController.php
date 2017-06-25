@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Task;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +20,11 @@ class TaskController extends Controller
     public function index()
     {
         //
+        $user=Auth::user();
+
+        // $tasks=Task::whereUser_id($user->id)->get();
+        $tasks=$user->tasks;
+        return view('tasks.index',compact('user','tasks'));
     }
 
     /**
