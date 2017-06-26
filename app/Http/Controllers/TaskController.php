@@ -46,6 +46,22 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+        'title'=>'required|max:30',
+        'end_date'=>'required',
+            ]);
+        $input=$request->all();
+        $user=Auth::user();
+        $user_task=$user->tasks()->whereTitle($request->title)->first();
+        if ($user_task) {
+            // session( ['message'=>'']);
+            // $request->session()->forget('message');
+            return back()->withErrors('this task already created');
+        }else{
+            $user->tasks()->create($input);
+            return back()->with(['message'=>'this task created']);
+
+        }
     }
 
     /**

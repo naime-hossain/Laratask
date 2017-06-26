@@ -335,6 +335,7 @@ li.list-group-item {
     text-align: left;
     vertical-align: initial;
     line-height: 60px;
+    margin-bottom: 10px;
 }
 .modal-content {
     background: #374148;
@@ -342,4 +343,19 @@ li.list-group-item {
 }
 .datepicker.dropdown-menu.open {
     z-index: 9999;
+}
+.alert.alert-danger {
+    background-color: #f55145;
+    color: #ffffff;
+    text-transform: capitalize;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.alert.alert-success {
+    background-color: #55b559;
+    color: #ffffff;
+    text-align: left;
+    text-transform: capitalize;
+    font-size: 16px;
+    border-radius: 5px;
 }
