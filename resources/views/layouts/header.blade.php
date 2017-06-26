@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Larablog') }}</title>
+    <title>{{ config('app.name', 'Laratask') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -37,7 +37,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand fa fa-3x" href="{{ url('/') }}">
-                        {{ config('app.name', 'Larablog') }}
+                        {{ config('app.name', 'Laratask') }}
                     </a>
                 </div>
 
@@ -54,16 +54,16 @@
                         <!-- Authentication Links -->
                          <li class="{{ $url==route('home')?'active':'' }}"><a href="{{route('home')}}" title="">home</a></li>
                         @if (Auth::check())
-                                 <li class="dropdown {{-- {{ $url==route('user.show',Auth::user()->name)||$url==route('user.posts',Auth::user()->name)?'active':'' }} --}}">
+                                 <li class="dropdown {{ $url==route('task.index')?'active':'' }}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
                              
-                                      {{--    <li><a href="{{ route('user.show',Auth::user()->name) }}" title="">Profile</a></li>
+                                 {{--         <li><a href="{{ route('user.show',Auth::user()->name) }}" title="">Profile</a></li> --}}
                                          
-                                         <li><a href="{{ route('user.posts',Auth::user()->name) }}" title="">All posts</a></li> --}}
+                                         <li><a href="{{ route('task.index') }}" title="">Your Tasks</a></li>
                                         <li>
                                             <a href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();

@@ -329,3 +329,17 @@ option {
     margin: 10px 0px 10px 0px;
     text-transform: capitalize;
 }
+li.list-group-item {
+    overflow: hidden;
+    margin: 0 auto;
+    text-align: left;
+    vertical-align: initial;
+    line-height: 60px;
+}
+.modal-content {
+    background: #374148;
+    text-align: left;
+}
+.datepicker.dropdown-menu.open {
+    z-index: 9999;
+}
