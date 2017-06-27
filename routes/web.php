@@ -12,11 +12,11 @@
 */
 use Carbon\Carbon;
 Route::get('/', function () {
-	
+
     return view('welcome');
 })->name('home');
 
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('task', 'TaskController');
+Route::resource('task', 'TaskController',['only'=>['index','store','update','destroy']]);

@@ -1,4 +1,6 @@
-
+@php
+   use Carbon\Carbon;
+@endphp
 @extends('layouts.app')
 @section('heading')
     {{-- expr --}}
@@ -75,16 +77,27 @@
         {{-- expr --}}
         @foreach ($tasks as $task)
           {{-- expr --}}
-           <li class="list-group-item">
+           <li class="list-group-item bg-success">
                       <span>
                         <a class="btn  btn-simple text-danger" class="" role="button" data-toggle="collapse" href="#body{{ $task->id }}" aria-expanded="false" aria-controls="collapseExample" title="Show The Description">{{ $task->title }}</a>
                       </span>
                  
 
-
+              @php
+               $now=trim(Carbon::now()->format('m-d-y'));
+                $end_date=trim(Carbon::parse($task->end_date)->format('m-d-y'));
+                if ($now==$end_date) {
+                  # code...
+                  $task->is_late=1;
+                  $task->save();
+                }
+              @endphp
+             
         <div class="pull-right">
         @if ($task->end_date)
-          <span class="btn" title="deadline">{{$task->end_date}}</span>
+          <span class="btn {{$task->is_late?'btn-danger':'' }}" 
+          title="deadline">{{ $task->is_late?'Task Delayed':$end_date }}</span>
+       {{--    {{Carbon::now()->format('m-d-y')}} --}}
         @endif
         
               <a href="" class="btn btn-info">done</a>
