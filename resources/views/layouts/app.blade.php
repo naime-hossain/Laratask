@@ -5,7 +5,7 @@
       <div class="welcome_text">
          <div class="container">
          	<div class="row">
-         		<div class="col-md-12 text-primary">
+         		<div class="col-md-12">
          			@yield('heading')
          		</div>
          	</div>
