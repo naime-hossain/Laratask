@@ -95,7 +95,29 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $task=Task::findOrFail($id);
+        $input=$request->all();
+        $user=Auth::user();
+        if ($request->title!=$task->title) {
+            # code...
+                  $user_task=$user->tasks()->whereTitle($request->title)->first();
+            if ($user_task) {
+                // session( ['message'=>'']);
+                // $request->session()->forget('message');
+                return back()->withErrors('This task already created Or TAsk is not Updated');
+            }else{
+
+                // $user->tasks()->whereId($id)->update($input);
+                $task->update($input);
+                return back()->with(['message'=>' task Updated']);
+
+            }
+        }else{
+             // $user->tasks()->whereId($id)->update($input);
+            $task->update($input);
+            return back()->with(['message'=>' task Updated']); 
+        }
+      
     }
 
     /**
@@ -107,5 +129,8 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
+        $task=Task::findOrFail($id);
+        $task->delete();
+        return back()->with(['message'=>' task Deleted']); 
     }
 }

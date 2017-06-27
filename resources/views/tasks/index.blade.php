@@ -5,7 +5,7 @@
     <h1>welcome {{ $user->name }}</h1>
 @endsection
 @section('content')
-  <div class="col-md-8 col-md-offset-2">
+  <div class="col-md-12 ">
   <div class="alert_wrap">
      @if ($errors->count()>0)
   @include('alert.error')
@@ -22,7 +22,7 @@
   add new task
 </a>
 
-<!-- Modal Core -->
+<!-- addNewTask Modal Core -->
 <div class="modal fade" id="addNewTask" tabindex="-1" role="dialog" aria-labelledby="addNewTaskLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -30,7 +30,7 @@
         <button type="button" class="btn btn-primary pull-right 3x" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="addNewTaskLabel">Add new task</h4>
       </div>
-      {!! Form::open(['action'=>'TaskController@store','method'=>'post','files' => true]) !!}
+      {!! Form::open(['action'=>'TaskController@store','method'=>'post']) !!}
           <div class="modal-body">
                 <div class="form-group col-md-6 {{ $errors->has('title') ? ' has-error' : '' }}">
                {!! Form::label('title','task title', []) !!}
@@ -64,6 +64,7 @@
     </div>
   </div>
 </div>
+{{-- model end --}}
   </div>
    <div class="panel">
      <div class="panel-heading">
@@ -78,7 +79,69 @@
                       <span>
                         <a class="btn  btn-simple text-danger" class="" role="button" data-toggle="collapse" href="#body{{ $task->id }}" aria-expanded="false" aria-controls="collapseExample" title="Show The Description">{{ $task->title }}</a>
                       </span>
-                        <div class="collapse" id="body{{ $task->id }}">
+                 
+
+
+        <div class="pull-right">
+        @if ($task->end_date)
+          <span class="btn" title="deadline">{{$task->end_date}}</span>
+        @endif
+        
+              <a href="" class="btn btn-info">done</a>
+                <a href="" data-toggle="modal" data-target="#editTask{{ $task->id }}" class="btn btn-success" title=""><i class="fa fa-edit"></i></a>
+
+                <!-- editTask Modal Core -->
+      <div class="modal fade" id="editTask{{ $task->id }}" tabindex="-1" role="dialog" aria-labelledby="editTask{{ $task->id }}Label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn btn-primary pull-right 3x" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="editTask{{ $task->id }}Label">edit task </h4>
+            </div>
+            {!! Form::model($task,['action'=>['TaskController@update',$task->id],'method'=>'put']) !!}
+                <div class="modal-body">
+                      <div class="form-group col-md-6 {{ $errors->has('title') ? ' has-error' : '' }}">
+                     {!! Form::label('title','task title', []) !!}
+                      {!! Form::text('title',null, ['class'=>"form-control"]) !!}
+                     </div>
+                      <div class="form-group col-md-6 {{ $errors->has('title') ? ' has-error' : '' }}">
+                     {!! Form::label('end date','task end date', []) !!}
+                      {!! Form::text('end_date',null, ['class'=>"form-control datepicker"]) !!}
+                     </div>
+
+                    <div class="form-group col-md-12 {{ $errors->has('body') ? ' has-error' : '' }}">
+                       {!! Form::label('body','task body', []) !!}
+                     {!! Form::textarea('body',null,['class'=>'form-control','rows'=>5]) !!}
+                   </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="form-group col-md-12">
+                   {!! Form::submit('update', ['class'=>'btn btn-primary']) !!}
+                  {{--  <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Close</button> --}}
+                 </div>
+
+                </div>
+        
+         
+
+       {!! Form::close() !!}
+        
+          </div>
+        </div>
+      </div>
+{{-- model end --}}
+          {!! Form::open(['action'=>['TaskController@destroy',$task->id],'method'=>'delete','class'=>'sm-form']) !!}
+                {!! Form::button("<i class='fa fa-trash-o'></i>",
+                 [
+                 'class'=>'btn btn-danger',
+                 'onclick'=>"return confirm('want to delete?')",
+                 'type'=>'submit'
+                 ]) !!}
+                
+
+          {!! Form::close() !!}
+        </div>
+               <div class="collapse" id="body{{ $task->id }}">
                           @if ($task->body)
                             <p>{{$task->body}}</p>
                             @else
@@ -86,12 +149,6 @@
                           @endif
                             
                         </div>
-
-
-        <div class="pull-right">
-          <a href="" class="btn btn-success" title=""><i class="fa fa-edit"></i></a>
-          <a href="" class="btn btn-danger" title=""><i class="fa fa-trash-o"></i></a>
-        </div>
            </li>
         @endforeach
       @else

@@ -19,6 +19,7 @@ class CreateTasksTable extends Migration
             $table->string('title');
             $table->string('end_date')->nullable();
             $table->integer('is_late')->default(0);
+            $table->integer('is_complete')->default(0);
             $table->text('body')->nullable();
             $table->timestamps();
         });

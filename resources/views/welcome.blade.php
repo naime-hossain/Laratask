@@ -1,8 +1,11 @@
-
+@php
+  use Carbon\Carbon;
+@endphp
 @extends('layouts.app')
 @section('heading')
     {{-- expr --}}
     <h1>welcome to Laratask</h1>
+    <p>The time is {{ Carbon::now()->isToday() }}</p>
 @endsection
 @section('content')
   <div class="col-md-8 col-md-offset-2">
