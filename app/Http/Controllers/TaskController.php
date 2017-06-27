@@ -74,6 +74,7 @@ class TaskController extends Controller
     public function show($id)
     {
         //
+        return redirect('/task')->with(['message'=>'nothing to show']);
     }
 
     /**
@@ -99,8 +100,10 @@ class TaskController extends Controller
          $task=Task::findOrFail($id);
         $input=$request->all();
         $user=Auth::user();
+
+        //check if the title is changed or not
         if ($request->title!=$task->title) {
-            # code...
+            # if title change do this
                   $user_task=$user->tasks()->whereTitle($request->title)->first();
             if ($user_task) {
                 // session( ['message'=>'']);
@@ -108,16 +111,49 @@ class TaskController extends Controller
                 return back()->withErrors('This task already created Or TAsk is not Updated');
             }else{
 
+                $now=trim(Carbon::now()->format('m-d-y'));
+                $new_date=trim(Carbon::parse($input['end_date'])->format('m-d-y'));
+                if ($now!=$new_date) {
+                  # code...
+                  $input['is_late']=0;
+                  
+                }
                 // $user->tasks()->whereId($id)->update($input);
                 $task->update($input);
                 return back()->with(['message'=>' task Updated']);
 
             }
         }else{
+              //if title dont chage do this
              // $user->tasks()->whereId($id)->update($input);
+                $now=trim(Carbon::now()->format('m-d-y'));
+                $new_date=trim(Carbon::parse($input['end_date'])->format('m-d-y'));
+                if ($now!=$new_date) {
+                  # code...
+                  $input['is_late']=0;
+                  
+                }
             $task->update($input);
             return back()->with(['message'=>' task Updated']); 
         }
+      
+    }
+
+      /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function done(Request $request, $id)
+    {
+         $task=Task::findOrFail($id);
+        $input=$request->all();
+        $user=Auth::user();
+        $task->is_complete=1;
+      $task->save();
+      return back()->with(['message'=>'TASK COMPLETED']);
       
     }
 

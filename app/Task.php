@@ -12,7 +12,7 @@ class Task extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id','title','body','end_date','is_late'];
+    protected $fillable = ['user_id','title','body','end_date','is_late','is_complete'];
     /**
      * Task belongs to User.
      *

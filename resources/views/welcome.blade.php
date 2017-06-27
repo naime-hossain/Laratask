@@ -1,11 +1,14 @@
-@php
+  @php
   use Carbon\Carbon;
 @endphp
 @extends('layouts.app')
 @section('heading')
     {{-- expr --}}
     <h1 class="text-primary">welcome to Laratask</h1>
-    <p>The time is {{ Carbon::now()->format('h:i:s') }}</p>
+      <p class="text-info">
+         {{ Carbon::now()->format('h:i:s') }}
+      </p>
+    
 @endsection
 @section('content')
   <div class="col-md-8 col-md-offset-2">

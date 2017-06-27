@@ -1,5 +1,5 @@
-@php
-   use Carbon\Carbon;
+  @php
+  use Carbon\Carbon;
 @endphp
 @extends('layouts.app')
 @section('heading')
@@ -70,7 +70,7 @@
   </div>
    <div class="panel">
      <div class="panel-heading">
-       <h3>All tasks</h3>
+       <h3 class="text-primary">All tasks</h3>
      </div>
      <ul class="list-group">
       @if (count($tasks)>0)
@@ -94,14 +94,29 @@
               @endphp
              
         <div class="pull-right">
-        @if ($task->end_date)
-          <span class="btn {{$task->is_late?'btn-danger':'' }}" 
-          title="deadline">{{ $task->is_late?'Task Delayed':$end_date }}</span>
-       {{--    {{Carbon::now()->format('m-d-y')}} --}}
-        @endif
-        
-              <a href="" class="btn btn-info">done</a>
-                <a href="" data-toggle="modal" data-target="#editTask{{ $task->id }}" class="btn btn-success" title=""><i class="fa fa-edit"></i></a>
+        {{-- Check if it is complete or not --}}
+         @if (!$task->is_complete)
+                  @if ($task->end_date)
+                  <span class="btn {{$task->is_late?'btn-danger':'' }}" 
+                    title="deadline">{{ $task->is_late?'Task Delayed':$end_date }}</span>
+                 {{--    {{Carbon::now()->format('m-d-y')}} --}}
+                  @endif
+            {{-- done button --}}
+              {!! Form::open(['action'=>['TaskController@done',$task->id],'method'=>'put','class'=>'sm-form']) !!}
+                    {!! Form::button("done",
+                     [
+                     'class'=>'btn btn-info',
+                     'onclick'=>"return confirm('is it complete?')",
+                     'type'=>'submit'
+                     ]) !!}
+                    
+
+              {!! Form::close() !!}
+                    <a href="" data-toggle="modal" data-target="#editTask{{ $task->id }}" class="btn btn-success" title=""><i class="fa fa-edit"></i></a>
+               @else
+               <span class="btn btn-success">Task Completed</span>
+         @endif
+    
 
                 <!-- editTask Modal Core -->
       <div class="modal fade" id="editTask{{ $task->id }}" tabindex="-1" role="dialog" aria-labelledby="editTask{{ $task->id }}Label" aria-hidden="true">

@@ -1,4 +1,6 @@
+
 <!DOCTYPE html>
+
 <html lang="{{ config('app.locale') }}">
 <head>
     <meta charset="utf-8">
@@ -17,6 +19,7 @@
     <link href="/css/style.css" rel="stylesheet"/>
 </head>
 <body>
+
  <div id="preloader">
         <div id="status">
             &nbsp;
@@ -38,6 +41,7 @@
                     <!-- Branding Image -->
                     <a class="navbar-brand fa fa-3x" href="{{ url('/') }}">
                         {{ config('app.name', 'Laratask') }}
+                      
                     </a>
                 </div>
 
