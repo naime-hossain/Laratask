@@ -75,6 +75,9 @@ class TaskController extends Controller
     {
         //
         return redirect('/task')->with(['message'=>'nothing to show']);
+        // throw new \Exception("Error Processing Request",1);
+        
+        
     }
 
     /**
