@@ -98,44 +98,50 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
          $task=Task::findOrFail($id);
-        $input=$request->all();
-        $user=Auth::user();
+         $user=Auth::user();
+         if ($task->user_id==$user->id) {
+                 $input=$request->all();
+                
 
-        //check if the title is changed or not
-        if ($request->title!=$task->title) {
-            # if title change do this
-                  $user_task=$user->tasks()->whereTitle($request->title)->first();
-            if ($user_task) {
-                // session( ['message'=>'']);
-                // $request->session()->forget('message');
-                return back()->withErrors('This task already created Or TAsk is not Updated');
-            }else{
+                //check if the title is changed or not
+                if ($request->title!=$task->title) {
+                    # if title change do this
+                          $user_task=$user->tasks()->whereTitle($request->title)->first();
+                    if ($user_task) {
+                        // session( ['message'=>'']);
+                        // $request->session()->forget('message');
+                        return back()->withErrors('This task already created Or TAsk is not Updated');
+                    }else{
 
-                $now=trim(Carbon::now()->format('m-d-y'));
-                $new_date=trim(Carbon::parse($input['end_date'])->format('m-d-y'));
-                if ($now!=$new_date) {
-                  # code...
-                  $input['is_late']=0;
-                  
+                        $now=trim(Carbon::now()->format('m-d-y'));
+                        $new_date=trim(Carbon::parse($input['end_date'])->format('m-d-y'));
+                        if ($now!=$new_date) {
+                          # code...
+                          $input['is_late']=0;
+                          
+                        }
+                        // $user->tasks()->whereId($id)->update($input);
+                        $task->update($input);
+                        return back()->with(['message'=>' task Updated']);
+
+                    }
+                }else{
+                      //if title dont chage do this
+                     // $user->tasks()->whereId($id)->update($input);
+                        $now=trim(Carbon::now()->format('m-d-y'));
+                        $new_date=trim(Carbon::parse($input['end_date'])->format('m-d-y'));
+                        if ($now!=$new_date) {
+                          # code...
+                          $input['is_late']=0;
+                          
+                        }
+                    $task->update($input);
+                    return back()->with(['message'=>' task Updated']); 
                 }
-                // $user->tasks()->whereId($id)->update($input);
-                $task->update($input);
-                return back()->with(['message'=>' task Updated']);
-
-            }
-        }else{
-              //if title dont chage do this
-             // $user->tasks()->whereId($id)->update($input);
-                $now=trim(Carbon::now()->format('m-d-y'));
-                $new_date=trim(Carbon::parse($input['end_date'])->format('m-d-y'));
-                if ($now!=$new_date) {
-                  # code...
-                  $input['is_late']=0;
-                  
-                }
-            $task->update($input);
-            return back()->with(['message'=>' task Updated']); 
-        }
+         }else{
+            return redirect('/task')->with(['message'=>'This is not your task']);
+         }
+            
       
     }
 
@@ -148,12 +154,20 @@ class TaskController extends Controller
      */
     public function done(Request $request, $id)
     {
-         $task=Task::findOrFail($id);
-        $input=$request->all();
+
+        $task=Task::findOrFail($id);
         $user=Auth::user();
-        $task->is_complete=1;
-      $task->save();
+        if ($task->user_id==$user->id) {
+          $input=$request->all();
+          $task->is_complete=1;
+          $task->save();
       return back()->with(['message'=>'TASK COMPLETED']);
+         }else{
+            return redirect('/task')->with(['message'=>'This is not your task']);
+         }
+
+         
+      
       
     }
 
@@ -165,9 +179,15 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
         $task=Task::findOrFail($id);
-        $task->delete();
-        return back()->with(['message'=>' task Deleted']); 
+         $user=Auth::user();
+           if ($task->user_id==$user->id) {
+             $task->delete();
+             return back()->with(['message'=>' task Deleted']); 
+         }else{
+            return redirect('/task')->with(['message'=>'This is not your task']);
+         }
+
+        
     }
 }
