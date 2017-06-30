@@ -36,11 +36,14 @@
 
               {{-- start of single list item --}}
                <li class="list-group-item bg-success">
-                      <span>
+                      {{-- <span>
                         <a class="btn  btn-simple text-danger" class="" role="button" data-toggle="collapse" href="#body{{ $task->id }}" aria-expanded="false" aria-controls="collapseExample" title="Show The Description">{{ $task->title }}</a>
+                      </span> --}}
+                      <span>
+                        <a class="btn  btn-simple" class="" role="button" data-toggle="popover" data-placement="top" title="" data-content="{{ $task->body }}" data-container="body" data-original-title="Task Description" aria-describedby="popover{{ $task->id }}">{{ $task->title }}<div class="ripple-container"></div></a>
                       </span>
 
-                   
+                     
                          
                       {{-- check if the task deadline is over or not  --}}
                       @php
@@ -255,14 +258,23 @@
 
                       {{-- Check if it is complete or not --}}
                        @if (!$task->is_complete)
-
+                             {{-- show alert button --}}
+                             @if (!$task->is_late)
+                               @if ($timeToAlert)
+                              <span class="btn btn-danger" 
+                            title="" data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Complete the task quickly">
+                            1 day to live
+                            </span>
+                               @endif
+                             @endif
                           {{-- check if the task has deadline or not --}}
                           @if ($task->end_date)
                           {{-- check if the task is late or not --}}
-                          <span class="btn btn-default{{$task->is_late?'btn-danger':'' }}{{ $timeToAlert?'btn-warning':''}}" 
+                            <span class="btn {{$task->is_late?'btn-danger':'' }}{{ $timeToAlert?'btn-warning':''}}" 
                             title="" data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="{{ $remaining_time }}">
                             {{ $task->is_late?'Task Delayed':$end_date }}
                             </span>
+
                          {{--    {{Carbon::now()->format('m-d-y')}} --}}
                        {{--   <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="left" title="" data-container="body" data-original-title="Tooltip on left">On left</button> --}}
                           @endif
@@ -282,7 +294,7 @@
                 </div>
 
                 {{-- show the task body if exist --}}
-                 <div class="collapse" id="body{{ $task->id }}">
+             {{--     <div class="collapse" id="body{{ $task->id }}">
 
                     @if ($task->body)
                       <p>{{$task->body}}</p>
@@ -290,7 +302,7 @@
                       <p  class="text-alert">There is no description</p>
                     @endif
                               
-                </div>
+                </div> --}}
         </li>
 {{-- end of single list item --}}
 
