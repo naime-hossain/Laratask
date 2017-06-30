@@ -49,7 +49,160 @@
                           $task->is_late=1;
                           $task->save();
                         }
+                         
+                        // find out the reamining day
+                        $now_y=trim(Carbon::now()->format('y'));
+                        $now_m=trim(Carbon::now()->format('m'));
+                        $now_d=trim(Carbon::now()->format('d'));
+                        $end_y=trim(Carbon::parse($task->end_date)->format('y'));
+                        $end_m=trim(Carbon::parse($task->end_date)->format('m'));
+                        $end_d=trim(Carbon::parse($task->end_date)->format('d'));
+
+                        $remaining_time='Remaining ';
+                        if ($end_y>$now_y) {
+                          $remaining_time.=$end_y-$now_y.' year ';
+                        }else{
+                          $remaining_time.=' 0 year ';
+                        }
+
+                       // calculate day and month if the current month is >=end mtnh
+                        if ($end_m>=$now_m) {
+                          $m=$end_m-$now_m;
+                          switch ($m) {
+                            case '0':
+                              $remaining_time.=' 0 month'. $end_d-$now_d . ' days';
+                              break;
+
+                              case '1':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '2':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '3':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '4':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '5':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '6':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                          
+                                 case '7':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '8':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '9':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '10':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '11':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                                   case '12':
+                               
+                               if ($end_d>$now_d) {
+                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                               }
+                               if ($end_d<$now_d) {
+                                 # code...
+                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                               }
+                              break;
+                            default:
+                              # code...
+                              break;
+                          }
+                          
+                        }
                       @endphp
+
+
                      
                 <div class="pull-right">
 
@@ -60,7 +213,7 @@
                           @if ($task->end_date)
                           {{-- check if the task is late or not --}}
                           <span class="btn {{$task->is_late?'btn-danger':'' }}" 
-                            title="deadline">{{ $task->is_late?'Task Delayed':$end_date }}</span>
+                            title="{{ $remaining_time }}">{{ $task->is_late?'Task Delayed':$end_date }}</span>
                          {{--    {{Carbon::now()->format('m-d-y')}} --}}
                           @endif
 
