@@ -53,6 +53,34 @@ class TaskController extends Controller
             ]);
         $input=$request->all();
         $user=Auth::user();
+        // restrict user to add previus date
+                    $now_y=trim(Carbon::now()->format('y'));
+                    $now_m=trim(Carbon::now()->format('m'));
+                    $now_d=trim(Carbon::now()->format('d'));
+                    $end_y=trim(Carbon::parse($input['end_date'])->format('y'));
+                    $end_m=trim(Carbon::parse($input['end_date'])->format('m'));
+                    $end_d=trim(Carbon::parse($input['end_date'])->format('d'));
+
+      if ($end_y<$now_y)
+       {
+           return back()->withErrors('You can not assign a task in previous year');                           
+       }else{
+            if ($end_m<$now_m){
+                return back()->withErrors('You can not assign a task in previous Month'); 
+            }elseif($end_m==$now_m)
+            {
+                if ($end_d<$now_d) {
+                    # code...
+                     return back()->withErrors('You can not assign a task in previous day');
+                }
+            }else{
+
+            }
+       }
+        //end of time restriction 
+
+
+
         $user_task=$user->tasks()->whereTitle($request->title)->first();
         if ($user_task) {
             // session( ['message'=>'']);
@@ -103,9 +131,34 @@ class TaskController extends Controller
          $task=Task::findOrFail($id);
          $user=Auth::user();
          if ($task->user_id==$user->id) {
-                 $input=$request->all();
-                
+         $input=$request->all();
 
+ // restrict user to add previus date
+                    $now_y=trim(Carbon::now()->format('y'));
+                    $now_m=trim(Carbon::now()->format('m'));
+                    $now_d=trim(Carbon::now()->format('d'));
+                    $end_y=trim(Carbon::parse($input['end_date'])->format('y'));
+                    $end_m=trim(Carbon::parse($input['end_date'])->format('m'));
+                    $end_d=trim(Carbon::parse($input['end_date'])->format('d'));
+
+      if ($end_y<$now_y)
+       {
+           return back()->withErrors('You can not assign a task in previous year');                           
+       }else{
+            if ($end_m<$now_m){
+                return back()->withErrors('You can not assign a task in previous Month'); 
+            }elseif($end_m==$now_m)
+            {
+                if ($end_d<$now_d) {
+                    # code...
+                     return back()->withErrors('You can not assign a task in previous day');
+                }
+            }else{
+
+            }
+       }
+        //end of time restriction      
+                
                 //check if the title is changed or not
                 if ($request->title!=$task->title) {
                     # if title change do this

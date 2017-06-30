@@ -203,7 +203,7 @@
                       @endphp
 
 
-                     
+                     {{--all buttons  --}}
                 <div class="pull-right">
 
                       {{-- Check if it is complete or not --}}
