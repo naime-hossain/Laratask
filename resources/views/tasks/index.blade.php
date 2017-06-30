@@ -65,7 +65,7 @@
                           $remaining_time.=' 0 year ';
                         }
 
-                       // calculate day and month if the current month is >=end mtnh
+                       // calculate day and month if the end month is >=current mtnh
                         if ($end_m>=$now_m) {
                           $m=$end_m-$now_m;
                           switch ($m) {
