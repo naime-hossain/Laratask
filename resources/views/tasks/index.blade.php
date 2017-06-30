@@ -39,6 +39,8 @@
                       <span>
                         <a class="btn  btn-simple text-danger" class="" role="button" data-toggle="collapse" href="#body{{ $task->id }}" aria-expanded="false" aria-controls="collapseExample" title="Show The Description">{{ $task->title }}</a>
                       </span>
+
+                   
                          
                       {{-- check if the task deadline is over or not  --}}
                       @php
@@ -257,9 +259,12 @@
                           {{-- check if the task has deadline or not --}}
                           @if ($task->end_date)
                           {{-- check if the task is late or not --}}
-                          <span class="btn {{$task->is_late?'btn-danger':'' }}{{ $timeToAlert?'btn-danger':''}}" 
-                            title="{{ $remaining_time }}">{{ $task->is_late?'Task Delayed':$end_date.' ( '.$remaining_time.' ) ' }}</span>
+                          <span class="btn btn-default{{$task->is_late?'btn-danger':'' }}{{ $timeToAlert?'btn-warning':''}}" 
+                            title="" data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="{{ $remaining_time }}">
+                            {{ $task->is_late?'Task Delayed':$end_date }}
+                            </span>
                          {{--    {{Carbon::now()->format('m-d-y')}} --}}
+                       {{--   <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="left" title="" data-container="body" data-original-title="Tooltip on left">On left</button> --}}
                           @endif
 
 
