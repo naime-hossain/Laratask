@@ -53,7 +53,7 @@ class TaskController extends Controller
             ]);
         $input=$request->all();
         $user=Auth::user();
-        // restrict user to add previus date
+    // restrict user to add previus date
                     $now_y=trim(Carbon::now()->format('y'));
                     $now_m=trim(Carbon::now()->format('m'));
                     $now_d=trim(Carbon::now()->format('d'));
@@ -64,7 +64,12 @@ class TaskController extends Controller
       if ($end_y<$now_y)
        {
            return back()->withErrors('You can not assign a task in previous year');                           
-       }else{
+       }
+       elseif($end_y>$now_y)
+       {
+         
+       }
+       else{
             if ($end_m<$now_m){
                 return back()->withErrors('You can not assign a task in previous Month'); 
             }elseif($end_m==$now_m)
@@ -144,7 +149,12 @@ class TaskController extends Controller
       if ($end_y<$now_y)
        {
            return back()->withErrors('You can not assign a task in previous year');                           
-       }else{
+       }
+       elseif($end_y>$now_y)
+       {
+         
+       }
+       else{
             if ($end_m<$now_m){
                 return back()->withErrors('You can not assign a task in previous Month'); 
             }elseif($end_m==$now_m)
