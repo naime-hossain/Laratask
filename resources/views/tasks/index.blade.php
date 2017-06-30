@@ -59,6 +59,7 @@
                         $end_d=trim(Carbon::parse($task->end_date)->format('d'));
 
                         $remaining_time='Remaining ';
+                        $timeToAlert=0;
                         if ($end_y>$now_y) {
                           $y=$end_y-$now_y;
                           switch ($y) {
@@ -68,11 +69,11 @@
                               $r_m=((12-$now_m)+$end_m);
                               //if remaining month is greater than 12
                               if ($r_m>=12) {
-                                $remaining_time='1 year '.($r_m-12).' months';
+                                $remaining_time.='1 year '.($r_m-12).' months';
                               }
                             //if remaining month is less than 12
                               else{
-                                $remaining_time=$r_m.' months';
+                                $remaining_time.=$r_m.' months';
                               }
                               
                               break;
@@ -81,11 +82,11 @@
                               $r_m=((12-$now_m)+$end_m);
                               //if remaining month is greater than 12
                               if ($r_m>=12) {
-                                $remaining_time=(($y+1)-1).' years '.($r_m-12).' months';
+                                $remaining_time.=(($y+1)-1).' years '.($r_m-12).' months';
                               }
                             //if remaining month is less than 12
                               else{
-                                $remaining_time=($y-1).' years '.$r_m.' months';
+                                $remaining_time.=($y-1).' years '.$r_m.' months';
                               }
                               break;
                           }
@@ -96,25 +97,38 @@
                               // calculate day and month if the end month is >=current mtnh and the end year is current year
                         if ($end_m>=$now_m) {
                           $r_m=$end_m-$now_m;
+                          $r_d=$end_d-$now_d;
                           switch ($r_m) {
                             case '0':
-                              $remaining_time.=$end_d-$now_d . ' days';
+                              $remaining_time.=$r_d . ' days';
+                              // set alert
+                              if ($r_d==1) {
+                                $timeToAlert=1;
+                              }
                               break;
 
                               case '1':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .=(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .=(30-$now_d)+($r_d).' days';
+                                  // set alert
+                                   if ((30-$now_d)+($r_d)==1) {
+                                          $timeToAlert=1;
+                                        }
                                }
                                if ($end_d<$now_d) {
                                  # code...
                                  $remaining_time .=(30-($now_d-$end_d)).' days';
+                                  // set alert
+                                   if ((30-($now_d-$end_d))==1) {
+                                          $timeToAlert=1;
+                                        }
                                }
                               break;
                                    case '2':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -124,7 +138,7 @@
                                    case '3':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -134,7 +148,7 @@
                                    case '4':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -144,7 +158,7 @@
                                    case '5':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -154,7 +168,7 @@
                                    case '6':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -165,7 +179,7 @@
                                  case '7':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -175,7 +189,7 @@
                                    case '8':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -185,7 +199,7 @@
                                    case '9':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -195,7 +209,7 @@
                                    case '10':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -205,7 +219,7 @@
                                    case '11':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -215,7 +229,7 @@
                                    case '12':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .= ($r_m-1).' month '.(30-$now_d)+($r_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
@@ -243,8 +257,8 @@
                           {{-- check if the task has deadline or not --}}
                           @if ($task->end_date)
                           {{-- check if the task is late or not --}}
-                          <span class="btn {{$task->is_late?'btn-danger':'' }}" 
-                            title="{{ $remaining_time }}">{{ $task->is_late?'Task Delayed':$end_date }}</span>
+                          <span class="btn {{$task->is_late?'btn-danger':'' }}{{ $timeToAlert?'btn-danger':''}}" 
+                            title="{{ $remaining_time }}">{{ $task->is_late?'Task Delayed':$end_date.' ( '.$remaining_time.' ) ' }}</span>
                          {{--    {{Carbon::now()->format('m-d-y')}} --}}
                           @endif
 
