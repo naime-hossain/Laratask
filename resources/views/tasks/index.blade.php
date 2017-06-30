@@ -62,7 +62,7 @@
                         if ($end_y>$now_y) {
                           $remaining_time.=$end_y-$now_y.' year ';
                         }else{
-                          $remaining_time.=' 0 year ';
+                          $remaining_time.='';
                         }
 
                        // calculate day and month if the end month is >=current mtnh
@@ -70,17 +70,17 @@
                           $m=$end_m-$now_m;
                           switch ($m) {
                             case '0':
-                              $remaining_time.=' 0 month'. $end_d-$now_d . ' days';
+                              $remaining_time.=$end_d-$now_d . ' days';
                               break;
 
                               case '1':
                                
                                if ($end_d>$now_d) {
-                                  $remaining_time .= ($m-1).' month '.(30-$now_d)+($end_d-$now_d).' days';
+                                  $remaining_time .=(30-$now_d)+($end_d-$now_d).' days';
                                }
                                if ($end_d<$now_d) {
                                  # code...
-                                 $remaining_time .= ($m-1).' month '.(30-($now_d-$end_d)).' days';
+                                 $remaining_time .=(30-($now_d-$end_d)).' days';
                                }
                               break;
                                    case '2':
