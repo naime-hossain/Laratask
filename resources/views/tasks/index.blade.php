@@ -1,5 +1,6 @@
   @php
   use Carbon\Carbon;
+  $i=1;
 @endphp
 @extends('layouts.app')
 @section('heading')
@@ -33,20 +34,49 @@
           @if (count($tasks)>0)
             {{-- expr --}}
             @foreach ($tasks as $task)
-
+               
               {{-- start of single list item --}}
                <li class="list-group-item bg-success">
                       {{-- <span>
                         <a class="btn  btn-simple text-danger" class="" role="button" data-toggle="collapse" href="#body{{ $task->id }}" aria-expanded="false" aria-controls="collapseExample" title="Show The Description">{{ $task->title }}</a>
                       </span> --}}
                       <span>
-                        <a class="btn  btn-simple" class="" role="button" data-toggle="popover" data-placement="top" title="" data-content="{{ $task->body }}" data-container="body" data-original-title="Task Description" aria-describedby="popover{{ $task->id }}">{{ $task->title }}<div class="ripple-container"></div></a>
+                        <a class="btn  btn-simple" class="" role="button" data-toggle="popover" data-placement="@php
+                          
+                        
+                         switch ($i) {
+                           case 1:
+                            echo 'top';
+                             break;
+                             case 2:
+                              echo 'left';
+                             break;
+                             case 3:
+                              echo 'right';
+                             break;
+                             case 4:
+                             echo 'left';
+                             break;
+
+                           
+                           default:
+                             # code...
+                             break;
+                         }
+
+
+                         @endphp" title="" data-content="{{ $task->body }}" data-container="body" data-original-title="Task Description" aria-describedby="popover{{ $task->id }}">{{ $task->title }}<div class="ripple-container"></div></a>
                       </span>
 
                      
                          
                       {{-- check if the task deadline is over or not  --}}
                       @php
+
+                      $i++;
+                      if ($i==5) {
+                        $i=2;
+                      }
                         $now=trim(Carbon::now()->format('d-m-y'));
                         $end_date=trim(Carbon::parse($task->end_date)->format('d-m-y'));
                         if ($now==$end_date) {
@@ -425,6 +455,9 @@
                           
                 
          </ul>
+       </div>
+       <div class="panel-footer">
+         {{ $tasks->links() }}
        </div>
       </div>
 
