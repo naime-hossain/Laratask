@@ -24,7 +24,7 @@ class TaskController extends Controller
         $user=Auth::user();
 
         // $tasks=Task::whereUser_id($user->id)->get();
-        $tasks=$user->tasks;
+     $tasks=$user->tasks()->orderBy('end_date','asc')->paginate(10);
         return view('tasks.index',compact('user','tasks'));
     }
 
