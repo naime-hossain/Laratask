@@ -300,9 +300,16 @@
                           {{-- check if the task has deadline or not --}}
                           @if ($task->end_date)
                           {{-- check if the task is late or not --}}
-                            <span class="btn {{$task->is_late?'btn-danger':'' }}{{ $timeToAlert?'btn-warning':''}}" 
+
+                          @php
+                          //find the if the remaining time is negetive or not
+                            $timeIsOver=str_replace('Remaining','',$remaining_time);
+                            $timeIsOver=str_replace('days','',$timeIsOver);
+
+                          @endphp
+                            <span class="btn {{$timeIsOver<0||$task->is_late?'btn-danger':'' }}{{ $timeToAlert?'btn-warning':''}}" 
                             title="" data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="{{ $remaining_time }}">
-                            {{ $task->is_late?'Task Delayed':$end_date }}
+                            {{ $task->is_late||$timeIsOver<0?'Task Delayed':$end_date }}
                             </span>
 
                          {{--    {{Carbon::now()->format('m-d-y')}} --}}
@@ -367,7 +374,6 @@
               {!! Form::close() !!}
                         
 
-                  {!! Form::close() !!}
               </div>
                 </div>
             
