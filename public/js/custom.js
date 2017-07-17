@@ -20,5 +20,9 @@
              // $('.datepicker').datepicker({
              //  weekStart:1
              //  });
+             var clock;
+               clock = $('.clock').FlipClock({
+          clockFace: 'TwentyFourHourClock'
+        });
         });   
 

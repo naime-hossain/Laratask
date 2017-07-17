@@ -5,9 +5,12 @@
 @section('heading')
     {{-- expr --}}
     <h1 class="text-primary">welcome to Laratask</h1>
-      <p class="text-info">
-         {{ Carbon::now()->format('h:i:s') }}
+     
+      <div class="col-md-12 " >
+         <p class="text-info clock">
+         {{-- {{ Carbon::now()->format('h:i:s') }} --}}
       </p>
+      </div>
     
 @endsection
 @section('content')
@@ -16,14 +19,10 @@
       <h3>
 
       
-          what is Laratask?
+          What is Laratask?
       </h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Laratask is a simple todo App.Develop with Laravel.You can easily assign your task here</p>
+   
  
 </div>
 

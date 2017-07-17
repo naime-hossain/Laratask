@@ -11,12 +11,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laratask') }}</title>
-
+<link rel="icon" href="/images/laravel-icon.png" type="image" sizes="16x16">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet" />
-<link href="/css/material-kit.css" rel="stylesheet"/>
-    <link href="/css/style.css" rel="stylesheet"/>
+   
+    <link href="/css/app.css" rel="stylesheet" />
+   
 </head>
 <body>
 

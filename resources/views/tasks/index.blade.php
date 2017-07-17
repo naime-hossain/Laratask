@@ -36,7 +36,7 @@
             @foreach ($tasks as $task)
                
               {{-- start of single list item --}}
-               <li class="list-group-item bg-success">
+               <li class="list-group-item bg-success"  data-toggle="tooltip" data-placement="right" data-container="" data-original-title="Click the title to see the description">
                       {{-- <span>
                         <a class="btn  btn-simple text-danger" class="" role="button" data-toggle="collapse" href="#body{{ $task->id }}" aria-expanded="false" aria-controls="collapseExample" title="Show The Description">{{ $task->title }}</a>
                       </span> --}}
@@ -300,7 +300,7 @@
                           {{-- check if the task has deadline or not --}}
                           @if ($task->end_date)
                           {{-- check if the task is late or not --}}
-
+                          
                           @php
                           //find the if the remaining time is negetive or not
                             $timeIsOver=str_replace('Remaining','',$remaining_time);
@@ -311,7 +311,18 @@
                             title="" data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="{{ $remaining_time }}">
                             {{ $task->is_late||$timeIsOver<0?'Task Delayed':$end_date }}
                             </span>
-
+                            {{-- counter --}}
+                         {{-- <span class="remaining_clock"></span>
+                            @section('footer')
+                              <script type="text/javascript">
+                          var days="{{ $timeIsOver }}";
+                          var clock = $('.remaining_clock').FlipClock(3600 * 24 * days, {
+                            clockFace: 'DailyCounter',
+                            countdown: true
+                          });
+                          </script>
+                            @endsection --}}
+                          
                          {{--    {{Carbon::now()->format('m-d-y')}} --}}
                        {{--   <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="left" title="" data-container="body" data-original-title="Tooltip on left">On left</button> --}}
                           @endif
