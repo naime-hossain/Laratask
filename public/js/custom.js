@@ -22,7 +22,7 @@
              //  });
              var clock;
                clock = $('.clock').FlipClock({
-          clockFace: 'TwentyFourHourClock'
+          clockFace: 'TwelveHourClock'
         });
         });   
 

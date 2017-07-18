@@ -36,8 +36,8 @@
             @foreach ($tasks as $task)
                
               {{-- start of single list item --}}
-               <li class="list-group-item bg-success"  data-toggle="tooltip" data-placement="right" data-container="" data-original-title="Click the title to see the description">
-                      {{-- <span>
+               <li class="list-group-item bg-success"  title="Click the title to see the description">
+                     {{--  <span>
                         <a class="btn  btn-simple text-danger" class="" role="button" data-toggle="collapse" href="#body{{ $task->id }}" aria-expanded="false" aria-controls="collapseExample" title="Show The Description">{{ $task->title }}</a>
                       </span> --}}
                       <span>
@@ -79,6 +79,7 @@
                       }
                         $now=trim(Carbon::now()->format('d-m-y'));
                         $end_date=trim(Carbon::parse($task->end_date)->format('d-m-y'));
+
                         if ($now==$end_date) {
                           # code...
                           $task->is_late=1;
@@ -285,7 +286,9 @@
 
                      {{--all buttons  --}}
                 <div class="pull-right">
-
+            {{--  <a class="btn-danger">
+               {{ Carbon::parse($task->end_date)->diffForHumans() }}
+             </a> --}}
                       {{-- Check if it is complete or not --}}
                        @if (!$task->is_complete)
                              {{-- show alert button --}}
@@ -322,7 +325,8 @@
                           });
                           </script>
                             @endsection --}}
-                          
+                         
+                       
                          {{--    {{Carbon::now()->format('m-d-y')}} --}}
                        {{--   <button type="button" class="btn btn-default btn-tooltip" data-toggle="tooltip" data-placement="left" title="" data-container="body" data-original-title="Tooltip on left">On left</button> --}}
                           @endif

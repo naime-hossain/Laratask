@@ -6,7 +6,7 @@
     {{-- expr --}}
     <h1 class="text-primary">welcome to Laratask</h1>
      
-      <div class="col-md-12 " >
+      <div class="col-md-12" >
          <p class="text-info clock">
          {{-- {{ Carbon::now()->format('h:i:s') }} --}}
       </p>
