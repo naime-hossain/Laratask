@@ -54,12 +54,12 @@ class TaskController extends Controller
         $input=$request->all();
         $user=Auth::user();
     // restrict user to add previus date
-                    $now_y=trim(Carbon::now()->format('y'));
-                    $now_m=trim(Carbon::now()->format('m'));
-                    $now_d=trim(Carbon::now()->format('d'));
-                    $end_y=trim(Carbon::parse($input['end_date'])->format('y'));
-                    $end_m=trim(Carbon::parse($input['end_date'])->format('m'));
-                    $end_d=trim(Carbon::parse($input['end_date'])->format('d'));
+        $now_y=trim(Carbon::now()->format('y'));
+        $now_m=trim(Carbon::now()->format('m'));
+        $now_d=trim(Carbon::now()->format('d'));
+        $end_y=trim(Carbon::parse($input['end_date'])->format('y'));
+        $end_m=trim(Carbon::parse($input['end_date'])->format('m'));
+        $end_d=trim(Carbon::parse($input['end_date'])->format('d'));
 
       if ($end_y<$now_y)
        {

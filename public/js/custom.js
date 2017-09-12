@@ -16,10 +16,12 @@
          $("html").niceScroll({
                cursorcolor:"#002c53"
         });
-             //                //datepicker
-             // $('.datepicker').datepicker({
-             //  weekStart:1
-             //  });
+             //datepicker
+ //            $(function () {
+ //     $('#datepicker').datepicker({  
+ //         minDate:new Date()
+ //      });
+ // });
              var clock;
                clock = $('.clock').FlipClock({
           clockFace: 'TwelveHourClock'
