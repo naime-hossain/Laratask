@@ -5,6 +5,7 @@
 /vendor
 /.idea
 /.vagrant
+/package-lock.json
 package-lock.json
 Homestead.json
 Homestead.yaml
